@@ -1,14 +1,12 @@
 define(function(require) {
 
-    var $ = require('jquery');
-    var Connection = require('models/connect');
-    var Router = require('router');
+    var DashboardView = require('views/dashboard');
 
     var init = function() {
-        var connection = new Connection();
+        var dashboard = DashboardView.init();
     }
 
-	return{
+    return{
         init: init
-	}
+    }
 });
