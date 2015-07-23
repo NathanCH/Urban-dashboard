@@ -1,0 +1,10 @@
+<section class="account-list-container">
+	<h3>Select an account</h3>
+	<ul class="account-list">
+		<% _.each(accounts, function(account) { %>
+		<li class="account-list__item">
+			<a href="<%= account.id %>" data-account-id="<%= account.id %>" class="account-list__link"><%= account.name %></a>
+		</li>
+		<% }); %>
+	</ul>
+</section>

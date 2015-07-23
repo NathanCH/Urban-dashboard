@@ -4,6 +4,7 @@ define(function(require) {
     var _               = require('underscore');
     var Backbone        = require('backbone');
     var Connection      = require('helpers/connect');
+    var AccountView     = require('views/account');
 
     var dashboardView = Backbone.View.extend({
         init: function() {
@@ -33,13 +34,20 @@ define(function(require) {
                 }
             );
         },
+        queryProperties: function(accountId) {
+            Connection.queryProperties(accountId).then(
+                function(saved) {},
+                function(error) {}
+            );
+        },
         renderConnect: function() {
             console.log('Connecting to Google Analytics...');
         },
         renderAccounts: function(accounts) {
-            accounts.forEach(account) {
-                console.log(account.name);
-            }
+            AccountView.init({
+                parent: this,
+                accounts: accounts
+            });
         }
     });
 

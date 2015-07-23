@@ -13,7 +13,6 @@ define(function(require) {
         },
         authenticate: function() {
             var authData = this.defaults.authData;
-            var connected = this.defaults.connected;
 
             return new Promise(function(saved, rejected) {
                 gapi.auth.authorize(authData, function(response) {
@@ -37,25 +36,25 @@ define(function(require) {
                 });
             });
         },
+        queryProperties: function(accountId) {
+            return new Promise(function(saved, rejected) {
+                gapi.client.analytics.management.webproperties.list({'accountId': accountId})
+                    .then(saved)
+                    .then(null, function(err) {
+                      rejected(Error('No properites found.'));
+                });
+            });
+        },
         handleAccounts: function(response) {
             var accounts = response.result.items;
-            var accountInfo = [];
 
             return new Promise(function(saved, rejected) {
                 if(accounts && accounts.length) {
-                    accounts.forEach(function(account) {
-
-                        accountInfo.push([
-                            account.id,
-                            account.name
-                        ]);
-
-                        saved(accountInfo);
-                    });
+                      saved(accounts);
                 }
 
                 else{
-                    rejected(Error('No accounts founds.'));
+                    rejected(Error('No accounts found.'));
                 }
             });
         },
