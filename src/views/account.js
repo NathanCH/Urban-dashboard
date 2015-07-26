@@ -17,11 +17,9 @@ define(function(require) {
             this.render();
         },
         buildAccountList: function(accounts) {
-
             var accountsList = [];
 
             accounts.forEach(function(account) {
-
                 var entry = {
                     name: account.name,
                     id: account.id
@@ -32,11 +30,9 @@ define(function(require) {
             return accountsList;
         },
         selectAccount: function(e) {
-
             var accountId = $(e.target).data('account-id');
-
-            this.parent.queryProperties(accountId);
-
+            this.parent.stateData.accountId = accountId;
+            this.parent.query('property');
             return false;
         },
         render: function() {

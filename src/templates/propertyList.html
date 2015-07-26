@@ -1,0 +1,10 @@
+<section class="property-list-container">
+    <h3>Select a property</h3>
+    <ul class="property-list">
+        <% _.each(properties, function(property) { %>
+        <li class="property-list__item">
+            <a href="<%= property.id %>" data-property-id="<%= property.id %>" class="property-list__link"><%= property.name %> (<%= property.id %>)</a>
+        </li>
+        <% }); %>
+    </ul>
+</section>

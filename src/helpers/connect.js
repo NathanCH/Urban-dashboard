@@ -12,16 +12,12 @@ define(function(require) {
             }
         },
         authenticate: function() {
-            var authData = this.defaults.authData;
+            var authData = this.defaults.authData,
+                errMsg = 'Could not connect to Google Analytics.';
 
             return new Promise(function(saved, rejected) {
                 gapi.auth.authorize(authData, function(response) {
-                    if(!response.error) {
-                        saved();
-                    }
-                    else{
-                        rejected(Error('Could not connect to Google Analytics.'));
-                    }
+                    response.error ? rejected(errMsg) : saved();
                 });
             });
         },
@@ -31,17 +27,12 @@ define(function(require) {
             return new Promise(function(saved) {
                 gapi.client.load('analytics', 'v3').then(function(){
                     gapi.client.analytics.management.accounts.list().then(function(){
-                        gapi.client.analytics.management.accounts.list().then(saved);
+                        gapi.client.analytics.management.accounts.list()
+                            .then(saved)
+                            .then(null, function(err) {
+                                rejected(Error('Could not query accounts.'));
+                        });
                     });
-                });
-            });
-        },
-        queryProperties: function(accountId) {
-            return new Promise(function(saved, rejected) {
-                gapi.client.analytics.management.webproperties.list({'accountId': accountId})
-                    .then(saved)
-                    .then(null, function(err) {
-                      rejected(Error('No properites found.'));
                 });
             });
         },
@@ -55,6 +46,56 @@ define(function(require) {
 
                 else{
                     rejected(Error('No accounts found.'));
+                }
+            });
+        },
+        queryProperties: function(accountId) {
+            return new Promise(function(saved, rejected) {
+                gapi.client.analytics.management.webproperties
+                    .list({
+                        'accountId': accountId
+                    })
+                    .then(saved)
+                    .then(null, function(err) {
+                      rejected(Error('Could not query properties.'));
+                });
+            });
+        },
+        handleProperties: function(response) {
+            var properties = response.result.items;
+
+            return new Promise(function(saved, rejected) {
+                if(properties && properties.length) {
+                    saved(properties);
+                }
+
+                else{
+                    rejected(Error('No properties found.'));
+                }
+            });
+        },
+        queryProfiles: function(accountId, propertyId) {
+            return new Promise(function(saved, rejected) {
+                gapi.client.analytics.management.profiles.list({
+                    'accountId': accountId,
+                    'webPropertyId': propertyId
+                })
+                .then(saved)
+                .then(null, function(err) {
+                    rejected(Error('Could not query profiles.'));
+                });
+            });
+        },
+        handleProfiles: function(response) {
+            var profiles = response.result.items;
+
+            return new Promise(function(saved, rejected) {
+                if(profiles && profiles.length) {
+                    saved(profiles);
+                }
+
+                else{
+                    rejected(Error('No profiles found.'));
                 }
             });
         },
