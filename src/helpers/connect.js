@@ -24,7 +24,7 @@ define(function(require) {
         queryAccounts: function() {
             var self = this;
 
-            return new Promise(function(saved) {
+            return new Promise(function(saved, rejected) {
                 gapi.client.load('analytics', 'v3').then(function(){
                     gapi.client.analytics.management.accounts.list().then(function(){
                         gapi.client.analytics.management.accounts.list()

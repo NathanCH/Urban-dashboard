@@ -8,6 +8,9 @@ define(function(require) {
     var profileView = Backbone.View.extend({
         el: '.container',
         template: _.template(ProfileList),
+        events: {
+            'click .profile-list__link' : 'selectProfile'
+        },
         init: function(options) {
             this.parent = options.parent;
             this.profiles = this.buildProfileList(options.profiles);
@@ -27,8 +30,13 @@ define(function(require) {
 
             return profilesList;
         },
+        selectProfile: function(e) {
+            var profileId = $(e.target).data('profile-id');
+            this.parent.state.profileId = profileId;
+            this.parent.renderReport();
+            return false;
+        },
         render: function() {
-            console.log(this.profiles);
             this.$el.append(this.template({
                 profiles : this.profiles
             }));

@@ -31,7 +31,7 @@ define(function(require) {
         },
         selectProperty: function(e) {
             var propertyId = $(e.target).data('property-id');
-            this.parent.stateData.propertyId = propertyId;
+            this.parent.state.propertyId = propertyId;
             this.parent.query('profile');
             return false;
         },

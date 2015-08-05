@@ -31,7 +31,7 @@ define(function(require) {
         },
         selectAccount: function(e) {
             var accountId = $(e.target).data('account-id');
-            this.parent.stateData.accountId = accountId;
+            this.parent.state.accountId = accountId;
             this.parent.query('property');
             return false;
         },
