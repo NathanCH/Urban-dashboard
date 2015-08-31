@@ -1,0 +1,11 @@
+<div class="connect-box__container">
+    <h2 class="connect-box__title">Select item below:</h2>
+    <hr class="connect-box__separator" />
+    <ul class="connect-list">
+        <% _.each(items, function(item) { %>
+            <li class="connect-list__item">
+                <a href="#connect?account=<%= item.id %>" data-item-id="<%= item.id %>" class="connect-list__link"><%= item.name %></a>
+            </li>
+        <% }); %>
+    </ul>
+</div>

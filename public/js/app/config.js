@@ -1,10 +1,11 @@
 require.config({
+    namespace: 'App',
     paths: {
         jquery: '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery',
         underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min',
         backbone: '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min',
-        text: '../thirdparty/require.text',
-        async: '../thirdparty/require.async'
+        text: '../lib/require.text',
+        async: '../lib/require.async'
     },
     shim: {
         'underscore': {
@@ -17,6 +18,20 @@ require.config({
     }
 });
 
-require(['app', 'async!https://apis.google.com/js/client.js!onload'], function(App, gapi) {
-    App.init();
-});
+require(['router', 'async!https://apis.google.com/js/client.js!onload'],
+
+    function(Router, gapi) {
+
+        var App = {
+            router: {},
+            models: {},
+            collections: {},
+            views: {},
+            init: function() {
+                App.router = new Router();
+            }
+        }
+
+        new App.init();
+    }
+);

@@ -1,0 +1,81 @@
+/*  General
+    ===
+
+    Body
+    ---
+*/
+    body    {
+        background: #16313c;
+    }
+
+
+/*  Connect Prompt
+    ===
+ */
+    .connect-prompt{
+        margin: 225px auto 225px 25%;
+        height: 50%;
+        position: relative;
+        width: 450px;
+    }
+    .connect-prompt__title{
+        color: #bbb;
+        font-style: 24px;
+        line-height: 30px;
+        margin: 0 0 10px;
+    }
+    .connect-prompt__lead{
+        color: #999;
+        font-style: 14px;
+    }
+    .connect-prompt__button{
+        background: #02796f;
+        color: white;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-family: "Open Sans";
+        font-weight: bold;
+        padding: 8px 14px;
+        border: none;
+        margin: 25px 0;
+    }
+    .connect-prompt__button:hover{
+        background: #058076;
+    }
+
+
+/*  Connect Box
+    ===
+ */
+    .connect-box{
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+    .connect-box--overlay{
+        background: rgba(0,0,0,.35);
+    }
+    .connect-box__container{
+        position: fixed;
+        width: 400px;
+        height: 300px;
+        border-radius: 3px;
+        background: #fff;
+        left: 50%;
+        margin: 200px 0px 0px -200px;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    .connect-box__msg{
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ddd;
+        text-transform: uppercase;
+        line-height: 270px;
+    }
+    .connect-box__msg--success{
+        color: #02796f;
+    }
