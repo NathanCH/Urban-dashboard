@@ -3,6 +3,7 @@ define(function(require) {
     var Backbone = require('backbone');
     var IndexController = require('controllers/indexController');
     var ConnectController = require('controllers/connectController');
+    var DashboardController = require('controllers/dashboardController');
 
     var Router = Backbone.Router.extend({
         initialize: function() {
@@ -13,13 +14,17 @@ define(function(require) {
         },
         routes: {
             '': 'index',
-            '*connect': 'connect'
+            'connect': 'connect',
+            'dashboard': 'dashboard'
         },
         index: function() {
             IndexController.init();
         },
         connect: function() {
             ConnectController.init();
+        },
+        dashboard: function() {
+           DashboardController.init();
         }
     });
 

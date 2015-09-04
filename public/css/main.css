@@ -60,13 +60,14 @@
     .connect-box__container{
         position: fixed;
         width: 400px;
-        height: 300px;
+        min-height: 300px;
         border-radius: 3px;
         background: #fff;
         left: 50%;
         margin: 200px 0px 0px -200px;
         padding: 15px;
         box-sizing: border-box;
+        box-shadow: 0px 1px 2px rgba(0,0,0,.20);
     }
     .connect-box__msg{
         text-align: center;
@@ -78,4 +79,41 @@
     }
     .connect-box__msg--success{
         color: #02796f;
+    }
+    .connect-box__title{
+        font-size: 22px;
+        margin: 10px 0;
+        color: #555;
+    }
+    .connect-box__separator{
+        border: 1px solid #eee;
+    }
+    .connect-box__list{
+        margin: 10px 0;
+        list-style: none;
+        width: 100%;
+    }
+    .connect-box__list-item{
+        width: inherit;
+        margin: 2px 0;
+    }
+    .connect-box__list-link{
+        padding: 10px 14px;
+        color: #333;
+        text-decoration: none;
+        position: relative;
+        display: block;
+    }
+    .connect-box__list-link:hover{
+        background-color: #eee;
+        border-radius: 3px;
+    }
+    .connect-box__list-link:hover:after{
+        position: absolute;
+        font-family: FontAwesome;
+        font-size: 18px;
+        content: "\f105";
+        top: 10px;
+        right: 18px;
+        color: #aaa;
     }

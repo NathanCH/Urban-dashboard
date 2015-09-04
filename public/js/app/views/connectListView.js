@@ -9,7 +9,7 @@ define(function(require) {
         el: '.connect-box',
         template: _.template(ConnectList),
         events: {
-            'click .connect-list__link' : 'selectListItem'
+            'click .connect-box__list-link' : 'selectListItem'
         },
         initialize: function(items, callback) {
             if(items && items.length) {
@@ -34,7 +34,7 @@ define(function(require) {
         selectListItem: function(e) {
             var itemId = $(e.target).data('item-id');
             this.callback(itemId);
-            this.$el.off('click', '.connect-list__link');
+            this.$el.off('click', '.connect-box__list-link');
             return false;
         },
         render: function() {

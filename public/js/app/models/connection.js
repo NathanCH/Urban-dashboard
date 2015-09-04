@@ -8,5 +8,5 @@ define(function(require) {
         profileId: null
     });
 
-    return Connection;
+    return new Connection;
 });
