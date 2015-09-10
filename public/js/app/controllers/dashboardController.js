@@ -1,10 +1,13 @@
 define(function(require) {
 
-    var dashboardView = {
+    var Connection = require('models/connection');
+    var DashboardView = require('views/dashboardView')
+
+    var dashboardController = {
         init: function() {
-            console.log('Made it');
+            this.dashboard = new DashboardView();
         }
     };
 
-    return dashboardView;
+    return dashboardController;
 });

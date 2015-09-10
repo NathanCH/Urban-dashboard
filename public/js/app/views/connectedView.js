@@ -2,7 +2,6 @@ define(function(require) {
 
     var Backbone     = require('backbone');
     var Connection = require('models/connection');
-
     var ConnectedMsg = require('text!templates/connectedMsg.html')
 
     var connectedView = Backbone.View.extend({

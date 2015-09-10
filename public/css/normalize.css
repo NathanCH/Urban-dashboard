@@ -135,7 +135,7 @@ dfn {
 
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin: 0;
 }
 
 /**
@@ -423,10 +423,30 @@ th {
   padding: 0;
 }
 
-/* List Items
-  ====
+/*  List Items
+    ====
 */
 ul{
   padding: 0px;
   margin: 0;
+}
+li{
+  list-style: none;
+}
+
+/*  Clearfix
+    ===
+*/
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix {
+    display: inline-block;
+}
+.clearfix {
+    display: block;
 }

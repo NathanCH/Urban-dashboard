@@ -117,3 +117,115 @@
         right: 18px;
         color: #aaa;
     }
+
+
+/*  Dashboard Layout
+    ===
+*/
+    .dashboard{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .dashboard__header{
+        position: inherit;
+        top: 0;
+        right: 0;
+        left: 150px;
+    }
+    .dashboard__sidebar{
+        position: inherit;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 150px;
+    }
+    .dashboard__sidebar--minimized{
+        width: 50px;
+    }
+
+
+/*  Header Bar
+    ===
+*/
+    .header-bar{
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 0 3px 0px rgba(0,0,0,.25);
+    }
+    .header-bar__section{}
+    .header-bar__item{
+        display: inline-block;
+    }
+    .header-bar__item > a,
+    .header-bar__item > i{
+        padding: 20px 15px;
+        cursor: pointer;
+        color: #333;
+    }
+    .header-bar__item--grey > a,
+    .header-bar__item--grey > i{
+        color: #999;
+    }
+    .header-bar__item > a:hover,
+    .header-bar__item > i:hover{
+        background-color: #eee;
+    }
+
+
+/*  Sidebar
+    ===
+*/
+    .sidebar{
+        width: 100%;
+        min-height: 100%;
+        background: #2f353f;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+    .sidebar__section{}
+
+/*  Site Brands
+    ===
+*/
+    .site-brand{
+        background: #eee;
+        width: 100%;
+        line-height: 56px;
+    }
+    .site-brand__logo{
+        font-size: 26px;
+        color: #444;
+        text-align: center;
+    }
+
+/*  Site Brands
+    ===
+*/
+    .nav{}
+    .nav__list{
+        margin: 5px 0;
+    }
+    .nav__list-item{}
+    .nav__link{
+        padding: 14px 20px;
+        display: block;
+        color: white;
+        text-decoration: none;
+    }
+    .nav__link:hover{
+        background: rgba(255,255,255,.25);
+    }
+
+/*  Sidebar Functionality
+    ---
+
+    Is coupled with layout modifier.
+*/
+    .dashboard__sidebar--minimized .nav__link-text{
+        display: none;
+    }
+    .dashboard__sidebar--minimized .site-brand-logo{
+        visibility: hidden;
+    }
