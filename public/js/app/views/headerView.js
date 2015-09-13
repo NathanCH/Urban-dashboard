@@ -13,7 +13,7 @@ define(function(require) {
             this.render();
         },
         toggleSidebar: function() {
-            this.trigger('toggle');
+            this.trigger('toggleSidebar');
         },
         render: function() {
             this.$el.html(this.template());

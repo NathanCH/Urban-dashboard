@@ -3,7 +3,7 @@ define(function(require) {
     var Backbone = require('backbone');
 
     var Connection = Backbone.Model.extend({
-        attributes: {
+        defaults: {
             accountId: null,
             propertyId: null,
             profileId: null

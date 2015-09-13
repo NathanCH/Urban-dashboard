@@ -5,6 +5,7 @@ define(function(require) {
     var DashboardLayout = require('text!templates/dashboardLayout.html')
     var HeaderView = require('views/headerView');
     var SidebarView = require('views/sidebarView');
+    var PanelView = require('views/panelView');
 
     var dashboardView = Backbone.View.extend({
         el: '.container',
@@ -18,12 +19,14 @@ define(function(require) {
             this.sidebar = new SidebarView();
 
             // Bind toggle event to sidebar and pass context of sidebar.
-            this.header.bind('toggle', _.bind(this.sidebar.toggle, this.sidebar));
+            this.header.bind('toggleSidebar', _.bind(this.sidebar.toggle, this.sidebar));
 
-            // this.panel = new PanelView('usersOnline', {
-            //     property : value
-            // });
-            // this.sidebar.close();
+            this.panel = new PanelView('Page Views', {
+                'ids': 'ga:' + Connection.get('profileId'),
+                'metrics': 'rt:pageviews',
+                'dimensions': 'rt:pagePath',
+                'sort': 'rt:pageviews'
+            });
         }
     });
 
