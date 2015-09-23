@@ -21,11 +21,31 @@ define(function(require) {
             // Bind toggle event to sidebar and pass context of sidebar.
             this.header.bind('toggleSidebar', _.bind(this.sidebar.toggle, this.sidebar));
 
+            // Load index panels.
+            this.dashboard();
+        },
+        dashboard: function() {
+            this.$el.find('.dashboard__content').empty();
+            this.panel = new PanelView('Page Views', {
+                'ids': 'ga:' + Connection.get('profileId'),
+                'metrics': 'rt:activeUsers'
+            });
+        },
+        topPages: function() {
+            this.$el.find('.dashboard__content').empty();
             this.panel = new PanelView('Page Views', {
                 'ids': 'ga:' + Connection.get('profileId'),
                 'metrics': 'rt:pageviews',
                 'dimensions': 'rt:pagePath',
                 'sort': 'rt:pageviews'
+            });
+        },
+        trends: function() {
+            this.$el.find('.dashboard__content').empty();
+            this.panel = new PanelView('Page Views', {
+                'ids': 'ga:' + Connection.get('profileId'),
+                'metrics': 'rt:activeUsers',
+                'dimensions': 'rt:deviceCategory'
             });
         }
     });

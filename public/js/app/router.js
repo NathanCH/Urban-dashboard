@@ -15,7 +15,8 @@ define(function(require) {
         routes: {
             '': 'index',
             'connect': 'connect',
-            'dashboard': 'dashboard'
+            'dashboard': 'dashboard',
+            'dashboard/:page': 'gotoPage'
         },
         index: function() {
             IndexController.init();
@@ -24,7 +25,20 @@ define(function(require) {
             ConnectController.init();
         },
         dashboard: function() {
-           DashboardController.init();
+            DashboardController.init();
+        },
+        gotoPage: function(page) {
+            switch(page) {
+                case 'topPages':
+                    DashboardController.topPages();
+                break;
+                case 'trends':
+                    DashboardController.trends();
+                break;
+                default:
+                    DashboardController.notFound();
+                break;
+            }
         }
     });
 
