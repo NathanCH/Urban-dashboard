@@ -26,9 +26,9 @@ define(function(require) {
             var resultCount = rawReport['result']['totalResults'] || 0;
 
             return {
-                'Last Updated': lastUpdated,
-                'Table Data': tableData,
-                'Results': resultCount
+                lastUpdated: lastUpdated,
+                tableData: tableData,
+                resultCount: resultCount
             }
         }
     }

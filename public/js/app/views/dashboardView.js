@@ -26,28 +26,18 @@ define(function(require) {
         },
         dashboard: function() {
             this.$el.find('.dashboard__content').empty();
-            this.panel = new PanelView('Page Views', {
+            this.activeUsersPanel = new PanelView('activeUsers', {
                 'ids': 'ga:' + Connection.get('profileId'),
                 'metrics': 'rt:activeUsers'
             });
-        },
-        topPages: function() {
-            this.$el.find('.dashboard__content').empty();
-            this.panel = new PanelView('Page Views', {
-                'ids': 'ga:' + Connection.get('profileId'),
-                'metrics': 'rt:pageviews',
-                'dimensions': 'rt:pagePath',
-                'sort': 'rt:pageviews'
-            });
-        },
-        trends: function() {
-            this.$el.find('.dashboard__content').empty();
-            this.panel = new PanelView('Page Views', {
+            this.devicesPanel = new PanelView('devices', {
                 'ids': 'ga:' + Connection.get('profileId'),
                 'metrics': 'rt:activeUsers',
                 'dimensions': 'rt:deviceCategory'
             });
-        }
+        },
+        topPages: function() {},
+        trends: function() {}
     });
 
     return dashboardView;

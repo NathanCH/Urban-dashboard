@@ -1,38 +1,50 @@
 define(function(require) {
 
-    var Backbone = require('backbone');
-    var ReportBuilder = require('helpers/reportBuilder');
-    var Panel = require('text!templates/panel.html');
+    var Backbone        = require('backbone');
+    var ReportBuilder   = require('helpers/reportBuilder');
+    var Panel           = require('text!templates/panel.html');
+
+    var ErrorView       = require('views/panels/errorView');
+    var ActiveUsersView = require('views/panels/activeUsersView');
+    var DevicesView     = require('views/panels/devicesView');
 
     var panelView = Backbone.View.extend({
         el: '.dashboard__content',
         template: _.template(Panel),
-        data: null,
-        initialize: function(title, query) {
+        initialize: function(panel, query) {
 
             var self = this;
 
             // Get data from report.
             ReportBuilder.get(query)
                 .then(function(response) {
-                    self.data = response;
-                    self.render();
+                    self.render({
+                        content: self.getPanel(response, panel)
+                    });
                 })
                 .catch(function(errMsg) {
-                    self.noConnection(errMsg);
+                    self.render({
+                        content: self.getPanel(errMsg)
+                    });
                 });
         },
-        render: function() {
-            console.log(this.data);
-            this.$el.append(this.template({
-                data: this.data
-            }));
+        getPanel: function(data, panel) {
+            switch (panel) {
+                case 'activeUsers':
+                    var panel = new ActiveUsersView(data);
+                break;
+                case 'devices':
+                    var panel = new DevicesView(data);
+                break;
+                default:
+                    var panel = new ErrorView(data);
+                break;
+            }
+
+            return panel.el;
         },
-        noConnection: function(errMsg) {
-            this.$el.append(this.template({
-                data: errMsg,
-                error: true
-            }));
+        render: function(viewObj) {
+            this.$el.append(this.template(viewObj));
         }
     });
 

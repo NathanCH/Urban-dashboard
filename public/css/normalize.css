@@ -437,16 +437,16 @@ li{
 /*  Clearfix
     ===
 */
-.clearfix:after {
+.clearfix:after{
     clear: both;
     content: ".";
     display: block;
     height: 0;
     visibility: hidden;
 }
-.clearfix {
+.clearfix{
     display: inline-block;
 }
-.clearfix {
+.clearfix{
     display: block;
 }

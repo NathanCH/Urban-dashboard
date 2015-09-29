@@ -1,17 +1,8 @@
 <div class="panel">
-    <% if(typeof error != 'undefined') { %>
-        <div class="panel__header">
-            <h3 class="panel_title">Error</h3>
-        </div>
-        <div class="panel__content">
-            <%= data %>
-        </div>
-    <% }else{ %>
-        <div class="panel__header">
-            <h3 class="panel_title">Panel Header</h3>
-        </div>
-        <div class="panel__content">
-            <%= data['Last Updated'] %>
-        </div>
-    <% } %>
+    <div class="panel__header">
+        <h3 class="panel_title">Panel Header</h3>
+    </div>
+    <div class="panel__content">
+        <%= content %>
+    </div>
 </div>
