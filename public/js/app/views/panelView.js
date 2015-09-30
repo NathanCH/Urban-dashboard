@@ -4,6 +4,7 @@ define(function(require) {
     var ReportBuilder   = require('helpers/reportBuilder');
     var Panel           = require('text!templates/panel.html');
 
+    var HeaderView      = require('views/panels/headerView');
     var ErrorView       = require('views/panels/errorView');
     var ActiveUsersView = require('views/panels/activeUsersView');
     var DevicesView     = require('views/panels/devicesView');
@@ -18,30 +19,41 @@ define(function(require) {
             // Get data from report.
             ReportBuilder.get(query)
                 .then(function(response) {
+                    var panelView = self.getPanel(response, panel);
                     self.render({
-                        content: self.getPanel(response, panel)
+                        header: panelView.header.el,
+                        body: panelView.body.el
                     });
                 })
                 .catch(function(errMsg) {
+                    var panelView = self.getPanel(errMsg);
                     self.render({
-                        content: self.getPanel(errMsg)
+                        header: panelView.header.el,
+                        body: panelView.body.el
                     });
                 });
         },
         getPanel: function(data, panel) {
             switch (panel) {
                 case 'activeUsers':
-                    var panel = new ActiveUsersView(data);
+                    return {
+                        header: new HeaderView('Active Users'),
+                        body: new ActiveUsersView(data)
+                    }
                 break;
                 case 'devices':
-                    var panel = new DevicesView(data);
+                    return {
+                        header: new HeaderView('Devices'),
+                        body: new DevicesView(data)
+                    }
                 break;
                 default:
-                    var panel = new ErrorView(data);
+                    return {
+                        header: new HeaderView('Error!'),
+                        body: new ErrorView(data)
+                    }
                 break;
             }
-
-            return panel.el;
         },
         render: function(viewObj) {
             this.$el.append(this.template(viewObj));
