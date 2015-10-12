@@ -5,7 +5,8 @@ require.config({
         underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min',
         backbone: '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min',
         text: '../lib/require.text',
-        async: '../lib/require.async'
+        async: '../lib/require.async',
+        json: '../lib/require.json'
     },
     shim: {
         'underscore': {

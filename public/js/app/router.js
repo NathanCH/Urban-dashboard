@@ -16,7 +16,7 @@ define(function(require) {
             '': 'index',
             'connect': 'connect',
             'dashboard': 'dashboard',
-            'dashboard/:page': 'gotoPage'
+            'dashboard/:page' : 'dashboard'
         },
         index: function() {
             IndexController.init();
@@ -24,21 +24,10 @@ define(function(require) {
         connect: function() {
             ConnectController.init();
         },
-        dashboard: function() {
+        dashboard: function(page) {
             DashboardController.init();
-        },
-        gotoPage: function(page) {
-            switch(page) {
-                case 'topPages':
-                    DashboardController.topPages();
-                break;
-                case 'trends':
-                    DashboardController.trends();
-                break;
-                default:
-                    DashboardController.notFound();
-                break;
-            }
+            var page = page || 'index';
+            DashboardController.newDashboard(page);
         }
     });
 

@@ -2,13 +2,15 @@ define(function(require) {
 
     var Backbone  = require('backbone');
     var Connection = require('models/connection');
-    var DashboardLayout = require('text!templates/dashboardLayout.html')
+    var DashboardLayout = require('text!templates/dashboardLayout.html');
     var HeaderView = require('views/headerView');
     var SidebarView = require('views/sidebarView');
     var PanelView = require('views/panelView');
+    var Definitions = require('json!definitions/en.json');
 
     var dashboardView = Backbone.View.extend({
         el: '.container',
+        cached: [],
         template: _.template(DashboardLayout),
         initialize: function() {
             this.render();
@@ -20,24 +22,37 @@ define(function(require) {
 
             // Bind toggle event to sidebar and pass context of sidebar.
             this.header.bind('toggleSidebar', _.bind(this.sidebar.toggle, this.sidebar));
+        },
+        createDashboard: function(dashboard) {
 
-            // Load index panels.
-            this.dashboard();
+            // Get dashboard data.
+            var data = this.getDefinitions(dashboard);
+
+            if(typeof data != "undefined") {
+                var title = data.title;
+                var panelsArray = data.panels;
+
+                // Create dashboard title and panels.
+                this.createTitle(title);
+                this.createPanels(panelsArray);
+            }
+
+            else{
+                console.log('Page not found.');
+            }
         },
-        dashboard: function() {
-            this.$el.find('.dashboard__content').empty();
-            this.activeUsersPanel = new PanelView('activeUsers', {
-                'ids': 'ga:' + Connection.get('profileId'),
-                'metrics': 'rt:activeUsers'
-            });
-            this.devicesPanel = new PanelView('devices', {
-                'ids': 'ga:' + Connection.get('profileId'),
-                'metrics': 'rt:activeUsers',
-                'dimensions': 'rt:deviceCategory'
+        createTitle: function(title) {
+            console.log(title);
+        },
+        createPanels: function(panelsArray) {
+            var self = this;
+            panelsArray.forEach(function(panel) {
+                return new PanelView(panel);
             });
         },
-        topPages: function() {},
-        trends: function() {}
+        getDefinitions: function(name) {
+            return Definitions['dashboard'][name];
+        }
     });
 
     return dashboardView;

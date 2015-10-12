@@ -1,0 +1,47 @@
+{
+	"dashboard" : {
+		"index": {
+			"title": "My Dashboard",
+			"panels": [
+				"activeUsers",
+				"devices"
+			]
+		},
+		"topPages": {
+			"title": "Top Pages",
+			"panels": [
+				"devices"
+			]
+		},
+		"trends": {
+			"title": "Now Trending",
+			"panels": [
+				"activeUsers"
+			]
+		}
+	},
+	"panel": {
+		"activeUsers": {
+			"view": "ActiveUsersView",
+			"title": "Active Users",
+			"refreshTime": 60,
+			"query": {
+				"metrics" : "rt:activeUsers"
+			}
+		},
+		"devices": {
+			"view": "DevicesView",
+			"title": "Devices",
+			"refreshTime": 30,
+			"query": {
+				"metrics" : "rt:activeUsers",
+				"dimensions" : "rt:deviceCategory"
+			}
+		},
+		"error": {
+			"view": "ErrorView",
+			"title": "Error!",
+			"refreshTime": 0
+		}
+	}
+}

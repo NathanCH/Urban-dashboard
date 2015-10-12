@@ -1,8 +1,12 @@
 define(function(require) {
 
+    var Connection = require('models/connection');
+
     var reportBuilder = {
-        get: function(query) {
+        get: function(queryData) {
             var self = this;
+            var query = self.bindConnection(queryData);
+
             return new Promise(function(saved, rejected) {
                 if(typeof gapi.client.analytics != "undefined") {
                     // Query google analytics realtime API.
@@ -19,6 +23,10 @@ define(function(require) {
                     rejected('Could not load analyics API.');
                 }
             });
+        },
+        bindConnection: function(queryData) {
+            queryData['ids'] = 'ga:' + Connection.get('profileId');
+            return queryData;
         },
         buildReport: function(rawReport) {
             var lastUpdated = rawReport['headers']['Date'];

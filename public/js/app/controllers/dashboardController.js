@@ -7,24 +7,11 @@ define(function(require) {
         init: function() {
             this.dashboard = new DashboardView();
         },
-        topPages: function() {
-            if(typeof this.dashboard != 'undefined') {
-                this.dashboard.topPages();
+        newDashboard: function(page) {
+            if(typeof this.dashboard == 'undefined') {
+                this.dashboard = new DashboardView();
             }
-            else {
-                new DashboardView();
-            }
-        },
-        trends: function() {
-            if(typeof this.dashboard != 'undefined') {
-                this.dashboard.trends();
-            }
-            else {
-                new DashboardView();
-            }
-        },
-        notFound: function() {
-            console.log('page not found');
+            this.dashboard.createDashboard(page);
         }
     };
 

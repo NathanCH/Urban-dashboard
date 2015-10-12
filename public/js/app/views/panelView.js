@@ -3,57 +3,52 @@ define(function(require) {
     var Backbone        = require('backbone');
     var ReportBuilder   = require('helpers/reportBuilder');
     var Panel           = require('text!templates/panel.html');
+    var Definitions     = require('json!definitions/en.json');
 
     var HeaderView      = require('views/panels/headerView');
     var ErrorView       = require('views/panels/errorView');
     var ActiveUsersView = require('views/panels/activeUsersView');
     var DevicesView     = require('views/panels/devicesView');
 
+
     var panelView = Backbone.View.extend({
         el: '.dashboard__content',
         template: _.template(Panel),
-        initialize: function(panel, query) {
+        initialize: function(panel) {
 
             var self = this;
+            var definition = self.getDefinition(panel);
+            var query = definition.query;
 
             // Get data from report.
             ReportBuilder.get(query)
                 .then(function(response) {
-                    var panelView = self.getPanel(response, panel);
+                    var panelView = self.getPanel(response, definition);
                     self.render({
                         header: panelView.header.el,
                         body: panelView.body.el
                     });
                 })
                 .catch(function(errMsg) {
-                    var panelView = self.getPanel(errMsg);
+                    var errDefinition = self.getDefinition('error');
+                    var panelView = self.getPanel(errMsg, errDefinition);
                     self.render({
                         header: panelView.header.el,
                         body: panelView.body.el
                     });
                 });
         },
-        getPanel: function(data, panel) {
-            switch (panel) {
-                case 'activeUsers':
-                    return {
-                        header: new HeaderView('Active Users'),
-                        body: new ActiveUsersView(data)
-                    }
-                break;
-                case 'devices':
-                    return {
-                        header: new HeaderView('Devices'),
-                        body: new DevicesView(data)
-                    }
-                break;
-                default:
-                    return {
-                        header: new HeaderView('Error!'),
-                        body: new ErrorView(data)
-                    }
-                break;
+        getPanel: function(panelData, definition) {
+            var panelTitle = definition.title;
+            var panelView = definition.view;
+
+            return {
+                header: new HeaderView(panelTitle),
+                body: new panelView(panelData)
             }
+        },
+        getDefinition: function(name) {
+            return Definitions['panel'][name];
         },
         render: function(viewObj) {
             this.$el.append(this.template(viewObj));
