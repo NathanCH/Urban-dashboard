@@ -10,7 +10,6 @@ define(function(require) {
     var ActiveUsersView = require('views/panels/activeUsersView');
     var DevicesView     = require('views/panels/devicesView');
 
-
     var panelView = Backbone.View.extend({
         el: '.dashboard__content',
         template: _.template(Panel),
@@ -42,9 +41,12 @@ define(function(require) {
             var panelTitle = definition.title;
             var panelView = definition.view;
 
+            // Dynamically create panel view.
+            var panelInstance = require('views/panels/' + panelView);
+
             return {
                 header: new HeaderView(panelTitle),
-                body: new panelView(panelData)
+                body: new panelInstance(panelData)
             }
         },
         getDefinition: function(name) {

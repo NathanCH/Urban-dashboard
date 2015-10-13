@@ -1,3 +1,9 @@
-<div class="panel__devices">
-	<%= lastUpdated %>
+<div class="panel__content panel__devices">
+	<%
+	tableData.forEach(function(row) {
+	%>
+		<div><%= row %></div>
+	<%
+	});
+	%>
 </div>

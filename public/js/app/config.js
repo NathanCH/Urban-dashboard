@@ -30,6 +30,9 @@ require(['router', 'async!https://apis.google.com/js/client.js!onload'],
             views: {},
             init: function() {
                 App.router = new Router();
+
+                // Enable button when Router & GAPI have loaded.
+                $('.connect-prompt__button').removeAttr('disabled').text('Allow Access');
             }
         }
 

@@ -22,7 +22,7 @@
 	},
 	"panel": {
 		"activeUsers": {
-			"view": "ActiveUsersView",
+			"view": "activeUsersView",
 			"title": "Active Users",
 			"refreshTime": 60,
 			"query": {
@@ -30,7 +30,7 @@
 			}
 		},
 		"devices": {
-			"view": "DevicesView",
+			"view": "devicesView",
 			"title": "Devices",
 			"refreshTime": 30,
 			"query": {
@@ -39,7 +39,7 @@
 			}
 		},
 		"error": {
-			"view": "ErrorView",
+			"view": "errorView",
 			"title": "Error!",
 			"refreshTime": 0
 		}

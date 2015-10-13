@@ -47,6 +47,9 @@
     .connect-prompt__button:hover{
         background: #058076;
     }
+    .connect-prompt__button[disabled] {
+        color: #599992;
+    }
 
 
 /*  Connect Box
@@ -252,15 +255,52 @@
 
 /*  Panel
     ===
+
+    General
+    ---
 */
     .panel{
         background: white;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
         border-radius: 2px;
-        padding: 15px;
         margin: 10px 0 0 10px;
         min-width: 250px;
         flex-grow: 1;
         flex-basis: 250px;
     }
-    .panel__title{}
-    .panel__content{}
+    .panel__container{}
+    .panel__content{
+        padding: 15px;
+    }
+
+
+/*  Panel Header
+    ---
+*/
+    .panel__header{
+        padding: 15px;
+        background-color: #fafafa;
+    }
+    .panel__title{
+        margin: 0;
+        color: #797979;
+        font-size: 14px;
+    }
+
+/*  Controls
+    ---
+*/
+    .controls{}
+    .controls__item{
+        display: inline-block;
+        margin: 0 0 0 5px;
+    }
+    .controls__link{
+        color: #797979;
+        font-size: 14px;
+        cursor: pointer;
+        padding: 5px;
+    }
+    .controls__link:hover{
+        color: #666;
+    }
